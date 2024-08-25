@@ -6,6 +6,10 @@ export default {
       backgroundImage: {
         "login-image": "url('/public/login-image.jpg')",
       },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+        
+      },
     },
   },
   plugins: [],
