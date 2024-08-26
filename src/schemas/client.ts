@@ -9,4 +9,5 @@ export const clientSchema = z.object({
   birthdate: z.string({
     message: "A data de nascimento do cliente é obrigatória",
   }),
+  state: z.string({ message: "O estado do cliente é obrigatório" }),
 });
