@@ -1,5 +1,5 @@
-import { Login } from "@/components/views/login";
+import { Login } from "@/pages/login";
 
 export function LoginLayout() {
-	return <Login />;
+  return <Login />;
 }
