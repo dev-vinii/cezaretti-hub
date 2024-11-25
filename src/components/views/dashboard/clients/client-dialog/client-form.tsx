@@ -40,7 +40,7 @@ function ClientForm() {
             name="username"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Nome</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
