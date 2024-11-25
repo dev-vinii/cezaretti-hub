@@ -4,17 +4,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { ClientForm } from "./client-form";
+import { ProductForm } from "./product-form";
 import { Separator } from "@/components/ui/separator";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 
-interface ClientDialogProps {
+interface ProductDialogProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-function ClientDialog({ isOpen, onClose }: ClientDialogProps) {
+function ProductDialog({ isOpen, onClose }: ProductDialogProps) {
   return (
     <Dialog open={isOpen}>
       <DialogContent
@@ -28,14 +28,14 @@ function ClientDialog({ isOpen, onClose }: ClientDialogProps) {
       >
         <DialogHeader className="flex items-center justify-between">
           <DialogTitle>Novo Cliente</DialogTitle>
-          <X onClick={() => onClose()} className="cursor-pointer" />
+          <X onClick={() => onClose()} />
           <DialogDescription className="hidden" />
         </DialogHeader>
         <Separator className="bg-black" />
-        <ClientForm />
+        <ProductForm />
       </DialogContent>
     </Dialog>
   );
 }
 
-export { ClientDialog };
+export { ProductDialog };
