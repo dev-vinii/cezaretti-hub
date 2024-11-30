@@ -7,13 +7,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { states } from "@/data/states";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { clientSchema } from "@/schemas/client";
-import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { productSchema } from "@/schemas/product";
+import { z } from "zod";
 import {
   Select,
   SelectContent,
@@ -21,23 +19,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { MultiSelect } from "@/components/widgets/molecules/multiselect";
+
+const availableSizes = ["S", "M", "L", "XL"];
+const availableColors = ["Red", "Green", "Blue", "Black"];
 
 function ProductForm() {
-  const clientForm = useForm<z.infer<typeof clientSchema>>({
-    resolver: zodResolver(clientSchema),
+  const productForm = useForm<z.infer<typeof productSchema>>({
+    resolver: zodResolver(productSchema),
   });
 
-  function onSubmit(values: z.infer<typeof clientSchema>) {
+  function onSubmit(values: z.infer<typeof productSchema>) {
     console.log(values);
   }
 
+  const { control } = productForm;
+
   return (
-    <Form {...clientForm}>
-      <form onSubmit={clientForm.handleSubmit(onSubmit)} className="grid gap-5">
+    <Form {...productForm}>
+      <form
+        onSubmit={productForm.handleSubmit(onSubmit)}
+        className="grid gap-5"
+      >
         <section className="flex flex-1 gap-6">
           <FormField
-            control={clientForm.control}
-            name="username"
+            control={control}
+            name="name"
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>Nome</FormLabel>
@@ -48,27 +55,15 @@ function ProductForm() {
               </FormItem>
             )}
           />
-          <FormField
-            control={clientForm.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem className="flex-1">
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
         </section>
+
         <section className="flex flex-1 gap-6">
           <FormField
-            control={clientForm.control}
-            name="phone"
+            control={control}
+            name="model"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Telefone</FormLabel>
+                <FormLabel>Modelo</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -77,33 +72,19 @@ function ProductForm() {
             )}
           />
           <FormField
-            control={clientForm.control}
-            name="birthdate"
-            render={({ field }) => (
-              <FormItem className="flex-1">
-                <FormLabel>Data de nascimento</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </section>
-        <section className="flex flex-1 gap-6">
-          <FormField
-            control={clientForm.control}
-            name="state"
+            control={control}
+            name="sizes"
             render={({ field }) => (
               <div className="grid flex-1 gap-2">
+                <FormLabel>Tamanhos disponíveis</FormLabel>
                 <Select value={field.value} onValueChange={field.onChange}>
                   <SelectTrigger className="flex-1">
-                    <SelectValue placeholder="Estado" />
+                    <SelectValue placeholder="Tamanhos disponíveis" />
                   </SelectTrigger>
                   <SelectContent className="bg-white shadow-lg">
-                    {states.map((state) => (
-                      <SelectItem key={state} value={state}>
-                        {state}
+                    {availableSizes.map((size) => (
+                      <SelectItem key={size} value={size}>
+                        {size}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -113,11 +94,73 @@ function ProductForm() {
             )}
           />
         </section>
+
+        <section className="flex flex-1 gap-6">
+          <FormField
+            control={control}
+            name="primaryColor"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>Cor Principal</FormLabel>
+                <FormControl>
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Selecione a Cor" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white shadow-lg">
+                      {availableColors.map((color) => (
+                        <SelectItem key={color} value={color}>
+                          {color}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={control}
+            name="availableColors"
+            render={({ field }) => (
+              <div className="grid flex-1 gap-2">
+                <FormLabel>Cores disponíveis</FormLabel>
+                <MultiSelect
+                  options={availableColors.map((color) => ({
+                    value: color,
+                    label: color,
+                  }))}
+                  selectedValues={field.value}
+                  onSelect={field.onChange}
+                  placeholder="Selecione as cores"
+                />
+                <FormMessage />
+              </div>
+            )}
+          />
+        </section>
+
+        <section className="flex flex-1 gap-6">
+          <FormField
+            control={control}
+            name="price"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>Preço</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </section>
         <Button
           type="submit"
           className="ml-auto flex cursor-pointer rounded-md bg-black p-4 text-sm text-white hover:opacity-90"
         >
-          Cadastrar
+          Cadastrar Produto
         </Button>
       </form>
     </Form>

@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table";
 import { ClientDialog } from "./client-dialog";
 import { useState } from "react";
+import { Trash } from "lucide-react";
 
 function Clients() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -32,7 +33,7 @@ function Clients() {
               <TableHead>Email</TableHead>
               <TableHead>Telefone</TableHead>
               <TableHead>Data de Nascimento</TableHead>
-              <TableHead className="text-right">Gasto Total</TableHead>
+              <TableHead>Gasto Total</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -42,7 +43,10 @@ function Clients() {
               <TableCell>joaosilva@exemplo.com</TableCell>
               <TableCell>(11) 98765-4321</TableCell>
               <TableCell>15/01/2023</TableCell>
-              <TableCell className="text-right">R$ 1.250,00</TableCell>
+              <TableCell>R$ 1.250,00</TableCell>
+              <TableCell className="text-right">
+                <Trash size={20} className="cursor-pointer" color="red" />
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell className="font-medium">CL002</TableCell>
@@ -50,7 +54,10 @@ function Clients() {
               <TableCell>mariaoliveira@exemplo.com</TableCell>
               <TableCell>(21) 91234-5678</TableCell>
               <TableCell>22/03/2023</TableCell>
-              <TableCell className="text-right">R$ 750,00</TableCell>
+              <TableCell>R$ 750,00</TableCell>
+              <TableCell className="text-right">
+                <Trash size={20} className="cursor-pointer" color="red" />
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>

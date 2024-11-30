@@ -27,7 +27,7 @@ function ProductDialog({ isOpen, onClose }: ProductDialogProps) {
         onInteractOutside={() => onClose()}
       >
         <DialogHeader className="flex items-center justify-between">
-          <DialogTitle>Novo Cliente</DialogTitle>
+          <DialogTitle>Novo produto</DialogTitle>
           <X onClick={() => onClose()} />
           <DialogDescription className="hidden" />
         </DialogHeader>
