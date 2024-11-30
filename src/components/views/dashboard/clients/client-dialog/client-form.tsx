@@ -31,12 +31,14 @@ function ClientForm() {
     console.log(values);
   }
 
+  const { control } = clientForm;
+
   return (
     <Form {...clientForm}>
       <form onSubmit={clientForm.handleSubmit(onSubmit)} className="grid gap-5">
         <section className="flex flex-1 gap-6">
           <FormField
-            control={clientForm.control}
+            control={control}
             name="username"
             render={({ field }) => (
               <FormItem className="flex-1">
@@ -49,7 +51,7 @@ function ClientForm() {
             )}
           />
           <FormField
-            control={clientForm.control}
+            control={control}
             name="email"
             render={({ field }) => (
               <FormItem className="flex-1">
@@ -64,7 +66,7 @@ function ClientForm() {
         </section>
         <section className="flex flex-1 gap-6">
           <FormField
-            control={clientForm.control}
+            control={control}
             name="phone"
             render={({ field }) => (
               <FormItem className="flex-1">
@@ -77,7 +79,7 @@ function ClientForm() {
             )}
           />
           <FormField
-            control={clientForm.control}
+            control={control}
             name="birthdate"
             render={({ field }) => (
               <FormItem className="flex-1">
@@ -92,7 +94,7 @@ function ClientForm() {
         </section>
         <section className="flex flex-1 gap-6">
           <FormField
-            control={clientForm.control}
+            control={control}
             name="state"
             render={({ field }) => (
               <div className="grid flex-1 gap-2">
