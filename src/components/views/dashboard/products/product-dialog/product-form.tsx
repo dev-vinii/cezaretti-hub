@@ -77,18 +77,15 @@ function ProductForm() {
             render={({ field }) => (
               <div className="grid flex-1 gap-2">
                 <FormLabel>Tamanhos disponíveis</FormLabel>
-                <Select value={field.value} onValueChange={field.onChange}>
-                  <SelectTrigger className="flex-1">
-                    <SelectValue placeholder="Tamanhos disponíveis" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white shadow-lg">
-                    {availableSizes.map((size) => (
-                      <SelectItem key={size} value={size}>
-                        {size}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <MultiSelect
+                  options={availableSizes.map((size) => ({
+                    value: size,
+                    label: size,
+                  }))}
+                  selectedValues={field.value}
+                  onSelect={field.onChange}
+                  placeholder="Selecione os tamanhos"
+                />
                 <FormMessage />
               </div>
             )}
